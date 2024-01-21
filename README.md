@@ -10,13 +10,16 @@ This script efficiently identifies and analyzes academic papers that are common 
 
 ```python
 import requests, json, hashlib
-cookie = "fp=38a4e7d2a761bb0feea68842159ecfd2; s_ecid=MCMID%7C63806046576518741164168996566958498187; ..."
+cookie = "YOUR_COOKIE" # It something like: "fp=38a4e7d2..."
 chunkSize = 100
+```
 
-# For our search in IEEE Xplore, we employed a segmented approach due to the database's search limitations.
-# Each segment focused on a specific aspect: Index Terms, Abstract, and Document Title.
-# In the following example we are interested in finding the common papers of three groups of keywords
 
+We used a segmented approach when searching in IEEE Xplore due to the limitations of the database. Each segment focused on a specific aspect: Index Terms, Abstract, and Document Title.
+
+In the following example, we aim to identify common papers among three groups of keywords. To address the possibility of an invalid cookie, we implemented progress functions. After each page load, we save our progress. This allows us to resume our search from where we left off in case we need to change the cookie later.
+
+```python
 # 1
 progress = loadProgress('progress.json')
 
